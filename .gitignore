@@ -4,6 +4,7 @@ dist/
 *.log
 .env
 !.env.example
+!**/.env.example
 backend/prisma/dev.db
 backend/prisma/dev.db-journal
 backend/dist/
@@ -12,3 +13,15 @@ admin/dist/
 .idea/
 .vscode/
 *.local
+backend/secrets/*.json
+backend/secrets/*.txt
+!backend/secrets/README.md
+# never commit CLI tokens
+.supabase/
+supabase/.env.local
+supabase/.project-ref
+mobile/src-capacitor/android/app/google-services.json
+mobile/src-capacitor/ios/**/GoogleService-Info.plist
+supabase/.temp/
+supabase/.branches/
+

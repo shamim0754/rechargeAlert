@@ -78,12 +78,28 @@ export default defineConfig((/* ctx */) => {
       // https: true,
       port: 9000,
       open: true, // opens browser window automatically
+      // Fallback when QCLI_API_BASE is unset — prefer setting .env instead
       proxy: {
-        '/auth': { target: 'http://127.0.0.1:3000', changeOrigin: true },
-        '/admin': { target: 'http://127.0.0.1:3000', changeOrigin: true },
-        '/alerts': { target: 'http://127.0.0.1:3000', changeOrigin: true },
-        '/balance': { target: 'http://127.0.0.1:3000', changeOrigin: true },
-        '/health': { target: 'http://127.0.0.1:3000', changeOrigin: true },
+        '/auth': {
+          target: 'https://skegtrsokhwkmpziyuvr.supabase.co/functions/v1/api',
+          changeOrigin: true,
+        },
+        '/admin': {
+          target: 'https://skegtrsokhwkmpziyuvr.supabase.co/functions/v1/api',
+          changeOrigin: true,
+        },
+        '/alerts': {
+          target: 'https://skegtrsokhwkmpziyuvr.supabase.co/functions/v1/api',
+          changeOrigin: true,
+        },
+        '/balance': {
+          target: 'https://skegtrsokhwkmpziyuvr.supabase.co/functions/v1/api',
+          changeOrigin: true,
+        },
+        '/health': {
+          target: 'https://skegtrsokhwkmpziyuvr.supabase.co/functions/v1/api',
+          changeOrigin: true,
+        },
       },
     },
 

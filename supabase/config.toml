@@ -1,0 +1,20 @@
+# https://supabase.com/docs/guides/cli/config
+project_id = "rechargealert"
+
+[api]
+enabled = true
+port = 54321
+
+[db]
+port = 54322
+major_version = 15
+
+[studio]
+enabled = true
+port = 54323
+
+[functions.api]
+verify_jwt = false
+
+[functions.poll-balances]
+verify_jwt = false

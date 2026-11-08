@@ -1,6 +1,9 @@
-// Empty = same-origin (Vite proxies /admin,/auth,... to backend in dev)
-const API_BASE = import.meta.env.VITE_API_BASE ?? '';
-
+// Local Quasar dev: always same-origin so Vite can proxy (avoids browser CORS / Failed to fetch).
+const API_BASE = import.meta.env.DEV
+  ? ''
+  : (import.meta.env.QCLI_API_BASE as string | undefined) ||
+    (import.meta.env.VITE_API_BASE as string | undefined) ||
+    '';
 
 let authToken: string | null = null;
 

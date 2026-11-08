@@ -7,6 +7,11 @@
     "backend": "npm run dev --prefix backend",
     "admin": "npm run dev --prefix admin",
     "mobile": "npm run dev --prefix mobile",
-    "setup:backend": "npm install --prefix backend && npm run db:setup --prefix backend"
+    "setup:backend": "npm install --prefix backend && npm run db:setup --prefix backend",
+    "supabase:push": "npx supabase db push",
+    "supabase:deploy": "npx supabase functions deploy api --no-verify-jwt && npx supabase functions deploy poll-balances --no-verify-jwt"
+  },
+  "devDependencies": {
+    "supabase": "^2.122.1"
   }
 }

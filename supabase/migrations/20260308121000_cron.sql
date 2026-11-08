@@ -1,0 +1,21 @@
+-- Optional: schedule balance poller every 15 minutes via pg_cron + pg_net.
+-- Requires extensions enabled in Supabase Dashboard → Database → Extensions.
+-- Replace PROJECT_REF and CRON_SECRET after deploy.
+
+-- create extension if not exists pg_cron with schema extensions;
+-- create extension if not exists pg_net with schema extensions;
+
+-- select cron.schedule(
+--   'rechargealert-poll-balances',
+--   '*/15 * * * *',
+--   $$
+--   select net.http_post(
+--     url := 'https://PROJECT_REF.supabase.co/functions/v1/poll-balances',
+--     headers := jsonb_build_object(
+--       'Content-Type', 'application/json',
+--       'x-cron-secret', 'CRON_SECRET'
+--     ),
+--     body := '{}'::jsonb
+--   );
+--   $$
+-- );
