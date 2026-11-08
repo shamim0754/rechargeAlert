@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.DS_Store
+*.log
+.env
+!.env.example
+backend/prisma/dev.db
+backend/prisma/dev.db-journal
+backend/dist/
+mobile/src-capacitor/www/
+admin/dist/
+.idea/
+.vscode/
+*.local

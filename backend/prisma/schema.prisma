@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                String   @id @default(cuid())
+  username          String   @unique
+  encryptedPassword String
+  status            String   @default("PENDING") // PENDING | APPROVED | REVOKED
+  monitoringEnabled Boolean  @default(false)
+  alertThresholdBdt Float?
+  alertEmail        String?
+  alertsPerDay      Int      @default(1) // max alerts in a calendar day
+  alertCountToday   Int      @default(0)
+  alertCountDate    String?  // YYYY-MM-DD (local BD day)
+  fcmToken          String?
+  descoAccountId    Int?
+  descoAccountNo    String?
+  descoMeterNo      String?
+  lastBalance       Float?
+  lastBalanceAt     DateTime?
+  lastAlertAt       DateTime?
+  balanceSnapshotAt String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+model Admin {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+}
