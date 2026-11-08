@@ -17,6 +17,8 @@ This project proxies DESCO prepaid portal APIs from a backend (avoids browser CO
 
 ### 1. Backend
 
+**Local (Node):**
+
 ```bash
 cd backend
 cp .env.example .env   # already present as .env for local dev
@@ -25,7 +27,21 @@ npm run db:setup
 npm run dev
 ```
 
-API: `http://localhost:3000`
+**Docker Compose:**
+
+```bash
+# ensure backend/.env exists with secrets (SMTP, JWT, etc.)
+docker compose up -d --build
+docker compose logs -f api
+```
+
+API: `http://localhost:3000`  
+SQLite data is stored in Docker volume `rechargealert_data`.
+
+```bash
+docker compose down          # stop
+docker compose down -v       # stop + wipe DB volume
+```
 
 Default admin:
 

@@ -1,0 +1,29 @@
+services:
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: rechargealert-api
+    ports:
+      - "${API_PORT:-3000}:3000"
+    env_file:
+      - ./backend/.env
+    environment:
+      # Persist SQLite inside the named volume (overrides local file:./dev.db)
+      DATABASE_URL: file:/app/data/prod.db
+      PORT: "3000"
+      # Comma-separated front-end origins in production
+      CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:9000,http://localhost:9001}
+      RUN_SEED: ${RUN_SEED:-true}
+    volumes:
+      - rechargealert_data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+
+volumes:
+  rechargealert_data:
